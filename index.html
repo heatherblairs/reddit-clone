@@ -8,7 +8,7 @@
   </head>
   <body ng-controller="PostList">
     <header>
-      <!-- NAVBAR AND DROPDOWN MENU -->
+
       <h1>Reddit Clone</h1>
       <input type="search" ng-model="search"><button>Search</button>
       <ul class="nav navbar-nav">
@@ -25,7 +25,6 @@
     </header>
     <main>
 
-      <!-- ADD POST FORM -->
       <form ng-show="addNewPost" class="addPostForm" name="addPostForm" ng-submit="addNewPost()">
         <h3>Add a Post</h3>
         <label>Title</label>
@@ -39,11 +38,9 @@
         <button type="submit">SUBMIT</button>
       </form>
 
-      <!-- MAIN BODY OF PAGE (POST LIST) -->
       <div ng-repeat="posts in post | filter:search | orderBy: dropdown">
         <div>
 
-          <!-- UPVOTES AND DOWNVOTES -->
         <h2>{{ posts.title }} |</h2>
           <button ng-click="upvote(posts)">
             <img class="upOrDownVote" src="upvote.png">
@@ -54,17 +51,14 @@
           <p ng-class="{ positive: posts.upvotes > 0 , negative: posts.upvotes < 0 }">{{ posts.upvotes }}</p>
         </div>
 
-        <!-- POST CONTENT -->
         <img ng-src="{{ posts.image }}">
         <h3>{{ posts.author }}</h3>
         <p>{{ posts.description }}</p>
         <p>{{ posts.date | date:'MMM d, y h:mm'}}</p>
 
-        <!-- COMMENTS -->
         <h5>Comments:</h5>
         <p ng-repeat="data in posts.comments"><b>{{ data.author }} </b>| {{ data.comment }}</p>
 
-        <!-- ADD A COMMENT -->
         <form action="#" ng-show="addNewComment" class="addCommentForm" name="addCommentForm" ng-submit="addNewComment(posts, addComment)">
           <h3>Add a Comment</h3>
           <label>Author</label>
@@ -73,6 +67,7 @@
             <textarea ng-model="addComment.comment" required></textarea>
           <button type="submit">SUBMIT</button>
         </form>
+
       </div>
     </main>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
