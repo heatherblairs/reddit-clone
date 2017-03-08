@@ -1,0 +1,49 @@
+header {
+  background-color: #336699;
+  top: 0;
+}
+
+header h1 {
+  color: #fff;
+}
+
+header h1, input, ul, button {
+  display: inline-block;
+  margin: 1rem;
+}
+
+main {
+  padding: 2rem;
+}
+
+main div {
+  background-color: #E6EFF2;
+  margin: 10px;
+}
+
+img {
+  height: 200px;
+  width: auto;
+}
+
+ul li {
+  list-style: none;
+}
+
+.upOrDownVote {
+  height: 15px;
+  width: 15px;
+  margin: 5px;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.addPostForm input {
+  display: inline;
+}
