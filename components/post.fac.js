@@ -1,9 +1,9 @@
 (function(){
   "use strict";
   angular
-    .module("redditClone")
-    .factory("postFactory", function($http) {
-      function getPosts() {
+    .module("campSpots")
+    .factory("postFactory", function($http){
+      function getPosts(){
         return $http.get('data/posts.json');
       }
       return {
