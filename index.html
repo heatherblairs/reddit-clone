@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
   </head>
-  <body ng-controller="mainCtrl">
+  <body>
     <header>
       <!-- NAVBAR AND DROPDOWN MENU -->
       <h1>Camp Spots</h1>
@@ -24,10 +24,11 @@
       </ul>
       <button ng-click="togglePostView()">Add a post</button>
     </header>
+
     <main>
 
       <!-- ADD POST FORM -->
-      <form ng-show="addNewPost" class="addPostForm" name="addPostForm" ng-submit="addNewPost()">
+      <form class="addPostForm" name="addPostForm" ng-submit="addNewPost()">
         <h3>Add a Post</h3>
         <label>Title</label>
           <input type="text" ng-model="addPost.title" required>
@@ -41,43 +42,41 @@
       </form>
 
       <!-- MAIN BODY OF PAGE (POST LIST) -->
-      <div ng-repeat="posts in post | filter:search | orderBy: dropdown">
-
-          <!-- UPVOTES AND DOWNVOTES -->
-        <div>
+      <section ng-controller="mainCtrl">
+        
+        <div ng-repeat="post in posts | filter: search | orderBy: dropdown">
           <h2>{{ post.title }} |</h2>
+          <img ng-src="{{ post.image }}">
+
           <button ng-click="upvote(posts)">
             <img class="upOrDownVote" src="upvote.png">
           </button>
           <button ng-click="downvote(posts)">
             <img class="upOrDownVote" src="downvote.png">
           </button>
-          <p ng-class="{ positive: posts.upvotes > 0 , negative: posts.upvotes < 0 }">{{ posts.upvotes }}</p>
+          <p ng-class="{ positive: posts.upvotes > 0 , negative: posts.upvotes < 0 }">{{ post.upvotes }}</p>
+          <h3>{{ post.author }}</h3>
+          <p>{{ post.description }}</p>
+
+          <h5>Comments:</h5>
+          <p ng-repeat="data in posts.comments"><b>{{ data.author }} </b>| {{ data.comment }}</p>
+
+          <form action="#" ng-show="addNewComment" class="addCommentForm" name="addCommentForm" ng-submit="addNewComment(posts, addComment)">
+            <h3>Add a Comment</h3>
+            <label>Author</label>
+              <input type="text" ng-model="addComment.author" required>
+            <label>Comment</label>
+              <textarea ng-model="addComment.comment" required></textarea>
+            <button type="submit">SUBMIT</button>
+          </form>
+
         </div>
+      </section>
 
-        <!-- POST CONTENT -->
-        <img ng-src="{{ post.image }}">
-        <h3>{{ post.author }}</h3>
-        <p>{{ post.description }}</p>
-        <p>{{ post.date | date:'MMM d, y h:mm'}}</p>
-
-        <!-- COMMENTS -->
-        <h5>Comments:</h5>
-        <p ng-repeat="data in posts.comments"><b>{{ data.author }} </b>| {{ data.comment }}</p>
-
-        <!-- ADD A COMMENT -->
-        <form action="#" ng-show="addNewComment" class="addCommentForm" name="addCommentForm" ng-submit="addNewComment(posts, addComment)">
-          <h3>Add a Comment</h3>
-          <label>Author</label>
-            <input type="text" ng-model="addComment.author" required>
-          <label>Comment</label>
-            <textarea ng-model="addComment.comment" required></textarea>
-          <button type="submit">SUBMIT</button>
-        </form>
-      </div>
     </main>
     <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="components/main.ctrl.js"></script>
     <script type="text/javascript" src="components/post.fac.js"></script>
+    <script type="text/javascript" src="components/main.ctrl.js"></script>
+
   </body>
 </html>
